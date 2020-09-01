@@ -3,7 +3,7 @@ import "components/InterviewerListItem.scss";
 const classnames = require("classnames");
 
 export default function InterviewerListItem(props) {
-  console.log(props)
+  // console.log(props)
 
   const interviewersClass = classnames(
     "interviewers__item",
@@ -19,7 +19,7 @@ export default function InterviewerListItem(props) {
     <li
       id={props.id}
       className={interviewersClass}
-      onClick={() => props.setInterviewer && props.setInterviewer(props.id)}
+      onClick={props.setInterviewer}
     >
       <img
         className={interviewersImgClass}
