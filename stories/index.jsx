@@ -1,7 +1,7 @@
 // Storybook:
 // import the necessary packages here below:
 
-import React from "react";
+import React, { Fragment } from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
@@ -21,6 +21,8 @@ import Show from "components/Appointment/Show";
 import Confirm from "components/Appointment/Confirm";
 import Status from "components/Appointment/Status";
 import Error from "components/Appointment/Error";
+import Form from "components/Appointment/Form";
+
 
 // if a db is not available, list variable required by components:
 const days = [
@@ -151,7 +153,7 @@ storiesOf("Appointment", module)
   ))
   .add("Show", () => (
     <Show
-      interviewer={interviewers[0]}
+      interviewer={interviewers[0].name}
       student="Lydia Miller-Jones"
       onEdit={action("onEdit")}
       onDelete={action("onDelete")}
@@ -172,4 +174,36 @@ storiesOf("Appointment", module)
       message="Could not delete appointment."
       onClose={action("onClose")}
     />
+  ))
+  .add("Form Create", () => (
+    <Form
+      interviewers={interviewers}
+      onSave={action("onSave")}
+      onCancel={action("onCancel")}
+    />
+  ))
+  .add("Form Edit", () => (
+    <Form
+      name="Hewlett Packard"
+      interviewers={interviewers}
+      interviewer={3}
+      onSave={action("onSave")}
+      onCancel={action("onCancel")}
+    />
+  ))
+  .add("Appointment Empty", () => (
+    <Fragment>
+      <Appointment id={1} time="12pm" />
+      <Appointment id="last" time="1pm" />
+    </Fragment>
+  ))
+  .add("Appointment Booked", () => (
+    <Fragment>
+      <Appointment
+        id={1}
+        time="12pm"
+        interview={{ student: "Lydia Miller-Jones", interviewer: interviewers[0] }}
+      />
+      <Appointment id="last" time="1pm" />
+    </Fragment>
   ))
