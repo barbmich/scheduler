@@ -43,13 +43,15 @@ export default function Appointment(props) {
   function destroy(bool) {
 
     if (!bool) {
-      transition(CONFIRM);
-    } else {
-      transition(DELETING);
+      transition(CONFIRM)
+    }
 
-      cancelInterview(id)
+    if (bool) {
+      transition(DELETING, true)
+
+      cancelInterview(props.id)
         .then(() => transition(EMPTY))
-        .catch(() => transition(ERROR_DELETE))
+        .catch((error) => transition(ERROR_DELETE, true));
     }
   }
 
@@ -58,13 +60,13 @@ export default function Appointment(props) {
       <Header time={time} />
       {mode === ERROR_SAVE &&
         <Error
-          onClose={() => transition(SHOW)}
+          onClose={back}
           message={"An error occurred. Could not save the interview."}
         />
       }
       {mode === ERROR_DELETE &&
         <Error
-          onClose={() => transition(SHOW)}
+          onClose={back}
           message={"An error occurred. Could not delete the interview."}
         />
       }
