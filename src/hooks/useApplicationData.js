@@ -9,31 +9,6 @@ export default function useApplicationData() {
     interviewers: {},
   });
 
-  function setSpotsForDay(targetDay, newSpots) {
-    setState((prev) => ({
-      ...prev,
-      days: prev.days.map((day) =>
-        day.name === targetDay ? { ...day, spots: newSpots } : day
-      ),
-    }));
-  }
-
-  useEffect(() => {
-    function spotsRemaining() {
-      state.days.forEach((day) => {
-        const newSpotsRemaining = day.appointments
-          .map((apptId) => state.appointments[apptId].interview)
-          .filter((item) => item === null).length;
-
-        setSpotsForDay(day.name, newSpotsRemaining);
-      });
-    };
-
-    spotsRemaining();
-  }, [state.appointments]);
-
-  const setDay = (day) => setState({ ...state, day });
-
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -47,7 +22,7 @@ export default function useApplicationData() {
 
     return axios
       .put(`/api/appointments/${id}`, appointment)
-      .then(`/api/days`)
+      // .then(`/api/days`)
       .then(() => {
         setState({
           ...state,
@@ -70,7 +45,7 @@ export default function useApplicationData() {
 
     return axios
       .delete(`/api/appointments/${id}`, appointment)
-      .then(`/api/days`)
+      // .then(`/api/days`)
       .then(() => {
         setState({
           ...state,
@@ -89,13 +64,38 @@ export default function useApplicationData() {
       const [days, appointments, interviewers] = all;
 
       setState((prev) => ({
-        day: days.data.name,
+        day: state.day,
         days: days.data,
         appointments: appointments.data,
         interviewers: interviewers.data,
       }));
     });
   }, []);
+
+  function setSpotsForDay(targetDay, newSpots) {
+    setState((prev) => ({
+      ...prev,
+      days: prev.days.map((day) =>
+        day.name === targetDay ? { ...day, spots: newSpots } : day
+      ),
+    }));
+  }
+
+  useEffect(() => {
+    function spotsRemaining() {
+      state.days.forEach((day) => {
+        const newSpotsRemaining = day.appointments
+          .map((apptId) => state.appointments[apptId].interview)
+          .filter((item) => item === null).length;
+        if (newSpotsRemaining !== day.spots) {
+          setSpotsForDay(day.name, newSpotsRemaining);
+        }
+      });
+    }
+    spotsRemaining();
+  });
+
+  const setDay = (day) => setState({ ...state, day });
 
   return {
     state,
