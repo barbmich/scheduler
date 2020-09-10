@@ -11,6 +11,7 @@ The app look.
 ![app](https://github.com/barbmich/scheduler/blob/master/docs/app.png)
 
 The list of slots available. This is updated client-side, following a successful response from the server.
+
 ![slots-available](https://github.com/barbmich/scheduler/blob/master/docs/slots-available.png)
 
 An empty slot.
