@@ -4,14 +4,16 @@ const classnames = require("classnames");
 
 export default function Button(props) {
 
-   const buttonClass = classnames("button", {"button--confirm": props.confirm, "button--danger": props.danger});
-  
+   const { confirm, danger, disabled, children, onClick } = props
+
+   const buttonClass = classnames("button", { "button--confirm": confirm, "button--danger": danger });
+
    return (
       <button
          className={buttonClass}
-         disabled={props.disabled}
-         onClick={props.onClick}
+         disabled={disabled}
+         onClick={onClick}
       >
-         {props.children}
+         {children}
       </button>);
 }

@@ -22,7 +22,6 @@ export default function useApplicationData() {
 
     return axios
       .put(`/api/appointments/${id}`, appointment)
-      // .then(`/api/days`)
       .then(() => {
         setState({
           ...state,
@@ -45,7 +44,6 @@ export default function useApplicationData() {
 
     return axios
       .delete(`/api/appointments/${id}`, appointment)
-      // .then(`/api/days`)
       .then(() => {
         setState({
           ...state,
@@ -70,7 +68,7 @@ export default function useApplicationData() {
         interviewers: interviewers.data,
       }));
     });
-  }, []);
+  }, [state.day]);
 
   function setSpotsForDay(targetDay, newSpots) {
     setState((prev) => ({
