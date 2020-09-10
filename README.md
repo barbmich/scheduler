@@ -15,6 +15,7 @@ The list of slots available. This is updated client-side, following a successful
 ![slots-available](https://github.com/barbmich/scheduler/blob/master/docs/slots-available.png)
 
 An empty slot.
+
 ![empty](https://github.com/barbmich/scheduler/blob/master/docs/empty.png)
 
 The Form appearance. Both name and interviewer are required to submit the booking. When updating an existing appointment, the current props for these fields are displayed. A 3 seconds setTimeout is planned server-side when the request is sent as network simulation. A 'saving' transition is displayed in the meantime.
