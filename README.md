@@ -22,7 +22,7 @@ The Form appearance. Both name and interviewer are required to submit the bookin
 ![form](https://github.com/barbmich/scheduler/blob/master/docs/form.png)
 
 How the appointment is displayed. The Edit and Delete options are displayed when hovering the element.
-![show](https://github.com/barbmich/scheduler/blob/master/docs/show.png
+![show](https://github.com/barbmich/scheduler/blob/master/docs/show.png)
 
 When deleting an interview, a confirmation is first displayed. As with the Form submission, a 1 second setTimeout is planned server-side to simulate a network. A 'deleting' transition is displayed.
 ![delete](https://github.com/barbmich/scheduler/blob/master/docs/delete.png)
